@@ -1,18 +1,10 @@
 # Plan Requests
 
-Plan requests are persistent markdown files that capture feature plans, track implementation progress across Claude sessions, and verify completion. Like pull requests, but the artifact is the plan rather than code.
+A Claude Code skill to save output from "plan mode" in markdown files, so plans can be easily edited, resumed, and verified after implementation.
 
 ## Installation
 
-Clone this repo and run the install script:
-
-```sh
-git clone https://github.com/jdamcd/plan-requests.git
-cd plan-requests
-./install.sh
-```
-
-To update after pulling changes, run `./install.sh` again. Restart Claude Code after installing.
+Run `./install.sh` to install (or update) this skill in `~/.claude/skills`. Restart Claude Code sessions after installing.
 
 ## Usage
 
