@@ -2,7 +2,7 @@
 name: plan-request
 description: "Save and track Claude Code plans"
 user-invocable: true
-argument-hint: "<create|list|show|execute|verify|complete> [plan-name]"
+argument-hint: "<create|list|execute|verify|complete|delete> [plan-name]"
 ---
 
 # Plan Request Skill
@@ -12,11 +12,11 @@ Manage saved plan request files in the `.plans/` directory. Plan requests are ma
 ## Argument Handling
 
 Parse `$ARGUMENTS` to determine the subcommand and plan name:
-- First word is the subcommand: `create`, `list`, `show`, `execute`, `verify`, or `complete`
+- First word is the subcommand: `create`, `list`, `execute`, `verify`, `complete`, or `delete`
 - Remaining words form the plan name (convert to kebab-case for the filename)
 - If `$ARGUMENTS` is empty, show the help output below
 - If the subcommand is not recognized, show the help output below
-- If a plan name is required but missing (`create`, `show`, `execute`, `verify`, `complete`), show an error message (e.g., "Missing plan name") followed by the help output
+- If a plan name is required but missing (`create`, `execute`, `verify`, `complete`, `delete`), show an error message (e.g., "Missing plan name") followed by the help output
 
 ## Help Output
 
@@ -30,10 +30,10 @@ Usage: /plan-request <command> [plan-name]
 Commands:
   create <name>    Create a new plan request (captures plan mode output if available)
   list             List all plan requests with status
-  show <name>      Display a plan request
   execute <name>   Begin or resume implementing a plan
   verify <name>    Check if plan requirements are implemented
   complete <name>  Verify and mark a plan as complete
+  delete <name>    Delete a plan request
 ```
 
 ## Subcommands
@@ -73,12 +73,6 @@ Plan Requests:
 | Search Feature  | draft       | 2025-01-14 |
 | Bug Fix Login   | complete    | 2025-01-13 |
 ```
-
-### show
-
-1. Read `.plans/<name>.md`
-2. If the file does not exist, report the error and suggest `/plan-request list`
-3. Display the full file contents to the user
 
 ### execute
 
@@ -144,6 +138,15 @@ Plan Requests:
      ```
    - Write the updated file
    - Display a completion summary
+
+### delete
+
+1. Check if `.plans/<name>.md` exists
+2. If the file does not exist, report the error and suggest `/plan-request list`
+3. Read the file and display the plan title and status from the YAML frontmatter
+4. Ask the user to confirm deletion
+5. If confirmed, delete the file using Bash `rm`
+6. Confirm deletion to the user
 
 ## Important Behaviors
 

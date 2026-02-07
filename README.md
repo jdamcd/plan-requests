@@ -18,10 +18,10 @@ Run `./install.sh` to install (or update) this skill in `~/.claude/skills`. Rest
 |---|---|
 | `create <name>` | Create a new plan request. Captures plan mode output if available. |
 | `list` | List all plan requests with their status. |
-| `show <name>` | Display the full contents of a plan request. |
 | `execute <name>` | Begin or resume implementing a plan. Tracks progress across sessions. |
 | `verify <name>` | Check if plan requirements have been implemented in the codebase. |
 | `complete <name>` | Verify all requirements and mark the plan as complete. |
+| `delete <name>` | Delete a plan request (with confirmation). |
 
 ### Workflow
 
